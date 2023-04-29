@@ -64,6 +64,10 @@ button {
     background-color: #375f68;
     white-space: nowrap;
 }
+.new-note:hover{
+    background-color: #0b202c;
+    cursor: pointer;
+}
 .new-note-div{
     grid-area: new-note;
     display: flex;
@@ -72,6 +76,10 @@ button {
 }
 .dark-Theme{
     background-color: #56536a;
+}
+.dark-Theme:hover{
+    background-color: #2f2d3d;
+    cursor: pointer;
 }
 .dark-flex{
     grid-area: dark-Theme;
@@ -84,8 +92,16 @@ button {
     margin-right: 0;
 
 }
+.save-button:hover{
+    background-color: #1c4e6d;
+    cursor: pointer;
+}
 .cancel-button{
     background-color: #9b332c;
+}
+.cancel-button:hover{
+    background-color: #672b27;
+    cursor: pointer;
 }
 .save-cancel{
     grid-area: save-cancel;
@@ -93,8 +109,6 @@ button {
     justify-content: flex-end;
     align-items: flex-start;
 }
-
-
 .main-content{
     height: 100vh;
     background-color: #f3e9de;
