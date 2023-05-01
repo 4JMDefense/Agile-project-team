@@ -28,7 +28,7 @@ li{
 .menu{
     display:flex;
     justify-content: flex-end;
-    gap: 10%;
+    gap: 5%;
     grid-area: menu;
     align-items: flex-end;
     margin: 0 7%;
@@ -199,7 +199,7 @@ footer{
 }
 
 
-@media screen and (min-width: 416px) and (max-width: 1300px) {
+@media screen and (min-width: 520px) and (max-width: 1300px) {
 
     li{
         font-size: 1.1em;
@@ -240,7 +240,7 @@ footer{
 
 }
 
-@media screen and (max-width: 415px) {
+@media screen and (max-width: 520px) {
 
     body{
         display: grid;
@@ -265,19 +265,19 @@ footer{
         height: 100%;
     }
     
-    .grid-area {
+    /* .grid-area {
         grid-template-areas:
         "head head"
-        "new-note menu"
+        "new-note dark-flex"
         "textarea textarea"
-        "dark-Theme save-cancel";
+        ". save-cancel";
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1.2fr 0.5fr 3.0fr 1.2fr;
-    }
+    } */
 
     .dark-flex{
-        align-items: flex-start;
-        justify-content: flex-start;
+        align-items: flex-end;
+        justify-content: flex-end;
     }
 
     .dark-Theme{
@@ -305,8 +305,13 @@ footer{
         font-size: 1.0em;
     }
     button {
+        padding: 0.7em;
+        font-size: 0.8em;
+    }
+    input::file-selector-button{
         padding: 0.8em;
         font-size: 0.9em;
+
     }
     footer img{
         width: 2em;

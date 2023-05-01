@@ -1,6 +1,8 @@
 const darkThemeButton = document.querySelector('.dark-Theme');
 const sidebar = document.querySelector('.sidebar');
 const mainContent = document.querySelector('.main-content');
+const logo = document.querySelector('#logo');
+
 
 darkThemeButton.addEventListener('click', function() {
   sidebar.classList.toggle('dark');
@@ -9,9 +11,12 @@ darkThemeButton.addEventListener('click', function() {
   if (darkThemeButton.textContent === 'Dark Theme') {
     darkThemeButton.textContent = 'Light Theme';
     darkThemeButton.classList.add('light-Theme-button');
+    logo.src = "img/github-mark-white.png";
   } else {
     darkThemeButton.textContent = 'Dark Theme';
     darkThemeButton.classList.remove('light-Theme-button')
+    logo.src = "img/github-mark.png";
+
   }
 });
 
@@ -36,8 +41,7 @@ newnoteButton.addEventListener('click', function() {
 });
 
 const notesArray = [
-    {title: "note one", body: "this is my first note"},
-    {title: "note two", body: "this is my second note"}
+    {title: "Welcome to Notify!", body: "Notify instructions go here"},
   ];
 const sidebarList = document.querySelector(".sidebar ul");
   
@@ -115,10 +119,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     reader.readAsText(file);
+    
+    fileInput.click();
+  });
 });
 
-  fileInput.click();
-    });
+
+
+
+
+
+
+
 
 
   
