@@ -67,4 +67,58 @@ sidebarList.addEventListener("click", function(event) {
   }
 });
 
+const importBtn = document.getElementById("fileInput");
+
+importBtn.addEventListener("click", async () => {
+  const fileInput = document.createElement("input");
+  fileInput.type = "file";
+
+  fileInput.addEventListener("change", async (event) => {
+    const file = event.target.files[0];
+    const formData = new FormData();
+    formData.append("file", file);
+
+    const fetchOptions = {
+      method: "POST",
+      body: formData,
+    };
+
+    try {
+      const response = await fetch("/api", fetchOptions);
+
+      if (response.ok) {
+        const contents = await response.text();
+        const title = file.name.replace(".txt", "");
+        createNote(title, contents);
+      } else {
+        console.error("Error uploading file:", response.statusText);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+
+  });
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const fileInput = document.getElementById("fileInput");
+
+    fileInput.addEventListener("change", async (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (e) => {
+        const contents = e.target.result;
+        const textarea = document.getElementById("note");
+        textarea.value = contents;
+    };
+
+    reader.readAsText(file);
+});
+
+  fileInput.click();
+    });
+
+
   

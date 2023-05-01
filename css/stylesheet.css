@@ -50,8 +50,8 @@ p{
     margin:0;
 }
 
-button {
-    margin: 0 7%;
+button, input::file-selector-button {
+    margin: 0 3%;
     border-radius: 10px;
     padding: 1em;
     font-family: 'Roboto', sans-serif;
@@ -59,6 +59,11 @@ button {
     color:white;
     font-size: 1em;
 }
+
+input::file-selector-button {
+    background-color: #1C4E6D;
+}
+
 
 .new-note{
     background-color: #375f68;
