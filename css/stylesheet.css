@@ -63,7 +63,10 @@ button, input::file-selector-button {
 input::file-selector-button {
     background-color: #1C4E6D;
 }
-
+input::file-selector-button:hover{
+    background-color: #375f68;
+    cursor: pointer;
+}
 
 .new-note{
     background-color: #375f68;
