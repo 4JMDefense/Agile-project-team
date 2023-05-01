@@ -152,6 +152,25 @@ textarea{
     border-radius: 8px;
     text-align: left;
 }
+textarea::-webkit-scrollbar {
+    width: 10px;
+
+  }
+textarea::-webkit-scrollbar-thumb {
+    background-color: #2f3542;
+    border-radius: 10px;
+
+  }
+textarea::-webkit-scrollbar-track {
+    background-color: grey;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 5px white;
+}
+textarea::-webkit-scrollbar-thumb:hover {
+    background-color:white;
+    cursor: pointer;
+  }
+
 ul {
     text-align: left;
 }
