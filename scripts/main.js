@@ -2,11 +2,20 @@ const darkThemeButton = document.querySelector('.dark-Theme');
 const sidebar = document.querySelector('.sidebar');
 const mainContent = document.querySelector('.main-content');
 const logo = document.querySelector('#logo');
+const allButtons = document.querySelectorAll('button');
+const importBtn = document.getElementById("fileInput");
+
+
 
 
 darkThemeButton.addEventListener('click', function() {
   sidebar.classList.toggle('dark');
   mainContent.classList.toggle('dark');
+
+  allButtons.forEach((button) => {
+    button.classList.toggle('button-border-dark');
+  });
+
 
   if (darkThemeButton.textContent === 'Dark Theme') {
     darkThemeButton.textContent = 'Light Theme';
@@ -71,7 +80,6 @@ sidebarList.addEventListener("click", function(event) {
   }
 });
 
-const importBtn = document.getElementById("fileInput");
 
 importBtn.addEventListener("click", async () => {
   const fileInput = document.createElement("input");
