@@ -18,43 +18,40 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+    <script src="scripts/script.js" defer></script>
     <script src="scripts/main.js" defer></script>
   </head>
 
   <body>
-    <nav class="sidebar">
-      <h2>My Notes</h2>
-        <ul class = "note-list">
-          <li>Welcome to Notify!</li>
-        </ul>
+    <nav class="sidebar" id="app">
+      <h2>Notify</h2>
+      <button class="dark-Theme" type="button">Dark Theme</button>
+      <div class="notes-sidebar">
+        <button class="new-note" type="button">New Note</button>
+        <div class="notes-list">
+          <div class="notes-list-item notes-list-item--selected">
+              <div class="notes-small-title">Welcome to Notify!</div>
+              <div class="notes-small-body">Instructions go here</div>
+              <div class="notes-small-updated">Thursday 3:30pm</div>
+          </div>
+      </div>
     </nav>
 
     <div class="main-content">
-        <main class = "grid-area">
-          <h1>Notify</h1>
-          <div class="new-note-div">
-            <button class="new-note" type="button">New Note</button>
+        <main>
+          <div class="notes-preview">
+            <input class="notes-title" type="text" placeholder="Enter a title...">
+            <textarea class="notes-body" placeholder="I am the notes body..."></textarea>
           </div>
-          <div class="dark-flex">
-            <button class="dark-Theme" type="button">Dark Theme</button>
-          </div>
-          <textarea id="note" name="note" placeholder = "This is a placeholder"></textarea>
-          <div class="save-cancel">
-            <button class="save-button" type="button">Save</button>
-            <button class="cancel-button" type="button">Cancel</button>
-            <input type="file" id="fileInput">
-
-          </div>
+          <button class="save-button" type="button">Save</button>
+          <input type="file" id="fileInput">
         </main>
 
         <footer>
-          <h3></h3>
           <div class="footer-img">
-            
             <a href="https://github.com/4JMDefense/Agile-project-team" target="_blank">
               <img src="img/github-mark.png"  id="logo" alt="Github link">
             </a>
-            
           </div> 
         </footer>
     </div>
