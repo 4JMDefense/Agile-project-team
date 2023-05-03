@@ -1,33 +1,17 @@
-/* 
-.first-color { 
-	background: #d6eba9; 
-}
-	
-.second-color { 
-	background: #9ed797; 
-}
-
-.third-color { 
-	background: #61b390; 
-}
-
-.fourth-color { 
-	background: #01352c; 
-} */
 
 .notes-title,
 .notes-body {
     border: none;
     outline: none;
     width: 100%;
-    background-color: #9ed797;
+    background-color: white;
 }
 .notes-preview {
     display: flex;
     flex-direction: column;
     padding: 2em 3em;
     flex-grow: 1;
-    background-color: #9ed797;
+    background-color: white;
 
 }
 .notes-title {
@@ -83,6 +67,7 @@ body {
     height: 100%;
     font-family: sans-serif;
 }
+
 main{
     display:flex;
     flex-direction: column;
@@ -91,7 +76,7 @@ main{
 
 
 .sidebar {
-    background-color: #61b390;
+    background-color: white;
     border-right: 2px solid #dddddd;
     flex-shrink: 0;
     overflow-y: auto;
@@ -107,7 +92,7 @@ h1,h2{
     padding-bottom: 0;
 }
 
-button, input::file-selector-button {
+ input::file-selector-button {
     margin: 0 3%;
     border-radius: 10px;
     padding: 1em;
@@ -126,8 +111,9 @@ input::file-selector-button:hover{
     cursor: pointer;
 }
 
-.new-note, .dark-Theme{
+.new-note, .dark-Theme, button{
     border: none;
+    border-radius: 3px;
     color: #ffffff;
     cursor: pointer;
     font-size: 1.1em;
@@ -154,20 +140,15 @@ input::file-selector-button:hover{
 
 .save-button{
     background-color: #375f68;
-    margin-right: 0;
+    /* margin-right: 0; */
 }
 .save-button:hover{
     background-color: #1c4e6d;
     cursor: pointer;
 }
-.save-cancel{
-    grid-area: save-cancel;
-    display:flex;
-    justify-content: flex-end;
-    align-items: flex-start;
-}
+
 .main-content{
-    background-color: #9ed797;
+    background-color: white;
     color: #01352c;
     width: 100%;
     min-height: 100vh;
@@ -177,8 +158,8 @@ input::file-selector-button:hover{
 
 textarea::-webkit-scrollbar {
     width: 10px;
+}
 
-  }
 textarea::-webkit-scrollbar-thumb {
     background-color: #2f3542;
     border-radius: 10px;
