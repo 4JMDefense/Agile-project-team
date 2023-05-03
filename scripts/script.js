@@ -2,11 +2,24 @@ const darkThemeButton = document.querySelector('.dark-Theme');
 const sidebar = document.querySelector('.sidebar');
 const mainContent = document.querySelector('.main-content');
 const logo = document.querySelector('#logo');
-
+const allButtons = document.querySelectorAll('button');
+const importBtn = document.getElementById("fileInput");
+const noteTitle = document.querySelector('.notes-title');
+const noteTextarea = document.querySelector('.notes-body');
+const notearea= document.querySelector('.notes-preview');
 
 darkThemeButton.addEventListener('click', function() {
   sidebar.classList.toggle('dark');
   mainContent.classList.toggle('dark');
+  notearea.classList.toggle('dark')
+  noteTextarea.classList.toggle('dark');
+  noteTitle.classList.toggle('dark');
+
+
+  allButtons.forEach((button) => {
+    button.classList.toggle('button-border-dark');
+  });
+
 
   if (darkThemeButton.textContent === 'Dark Theme') {
     darkThemeButton.textContent = 'Light Theme';
@@ -21,23 +34,12 @@ darkThemeButton.addEventListener('click', function() {
 });
 
 
-const cancelButton = document.querySelector('.cancel-button');
-const noteTextarea = document.querySelector('#note');
 const saveButton = document.querySelector('.save-button');
-
-cancelButton.addEventListener('click', function() {
-    noteTextarea.classList.add('hidden');
-    saveButton.classList.add('hidden');
-    cancelButton.classList.add('hidden');
-});
-
 const newnoteButton = document.querySelector('.new-note');
 
 newnoteButton.addEventListener('click', function() {
-    noteTextarea.classList.remove('hidden');
-    saveButton.classList.remove('hidden');
-    cancelButton.classList.remove('hidden');
     noteTextarea.value = '';
+    noteTitle.value = '';
 });
 
 const notesArray = [
@@ -46,32 +48,21 @@ const notesArray = [
 const sidebarList = document.querySelector(".sidebar ul");
   
 saveButton.addEventListener("click", function() {
-    const title = prompt("Please enter a title for your note");
-    if (title) {
-        const newNote = {title: title, body: noteTextarea.value};
+    if (noteTitle) {
+        const newNote = {title: noteTitle.value, body: noteTextarea.value};
     
         notesArray.push(newNote);
     
         const newListItem = document.createElement("li");
-        newListItem.textContent = title;
+        newListItem.textContent = newNote.title;
     
         sidebarList.appendChild(newListItem);
     
         noteTextarea.value = "";
+        noteTitle.value = "";
     }
 });
 
-sidebarList.addEventListener("click", function(event) {
-  if(event.target.tagName === "LI") {
-    const clickedTitle = event.target.textContent;
-    const clickednote = notesArray.find(function(note) {
-        return note.title === clickedTitle;
-    });
-    noteTextarea.value = clickednote.body;
-  }
-});
-
-const importBtn = document.getElementById("fileInput");
 
 importBtn.addEventListener("click", async () => {
   const fileInput = document.createElement("input");
@@ -114,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     reader.onload = (e) => {
         const contents = e.target.result;
-        const textarea = document.getElementById("note");
+        const textarea = document.querySelector(".notes-body");
         textarea.value = contents;
     };
 
@@ -125,12 +116,3 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-
-
-
-
-
-
-
-
-  
