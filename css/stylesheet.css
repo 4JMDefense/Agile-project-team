@@ -56,7 +56,6 @@
 
 html, body{
     color: #01352c;
-    font-family: 'Roboto Mono', monospace;
     margin:0;
     height: 100%;
     text-align: center;
@@ -74,6 +73,9 @@ main{
     flex: 13;
 }
 
+textarea{
+    font-family: sans-serif;
+}
 
 .sidebar {
     background-color: white;
@@ -92,11 +94,10 @@ h1,h2{
     padding-bottom: 0;
 }
 
- input::file-selector-button {
+input::file-selector-button {
     margin: 0 3%;
     border-radius: 10px;
     padding: 1em;
-    font-family: 'Roboto', sans-serif;
     border-style: none;
     color:white;
     font-size: 1em;
@@ -203,7 +204,7 @@ footer{
   
   .main-content.dark, .notes-preview.dark, .notes-title.dark, .notes-body.dark {
     background-color: #04594b;
-    color: #d6eba9;
+    color: white;
   }
   
  .light-Theme-button {
@@ -212,7 +213,7 @@ footer{
 }
 
 input::file-selector-button, .button-border-dark {
-    border: 3px solid #9ed797; 
+    border: 1.5px solid white; 
   }
 
 
@@ -281,16 +282,6 @@ input::file-selector-button, .button-border-dark {
         height: 80vh;
         height: 100%;
     }
-    
-    /* .grid-area {
-        grid-template-areas:
-        "head head"
-        "new-note dark-flex"
-        "textarea textarea"
-        ". save-cancel";
-        grid-template-columns: 1fr 1fr;
-        grid-template-rows: 1.2fr 0.5fr 3.0fr 1.2fr;
-    } */
 
     .dark-flex{
         align-items: flex-end;
