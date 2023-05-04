@@ -212,13 +212,8 @@ footer{
   }
   
   .main-content.dark, .notes-preview.dark, .notes-title.dark, .notes-body.dark {
-<<<<<<< HEAD
     background-color: #04594b;
     color: white;
-=======
-    background-color: #1a274a;
-    color: #f7ffe6;
->>>>>>> ebce482b796192eeb1bd909ab723208033b7b986
   }
   
  .light-Theme-button {
@@ -227,11 +222,7 @@ footer{
 }
 
 input::file-selector-button, .button-border-dark {
-<<<<<<< HEAD
     border: 1.5px solid white; 
-=======
-    border: 3px solid #92bce1; 
->>>>>>> ebce482b796192eeb1bd909ab723208033b7b986
   }
 
 
