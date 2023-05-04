@@ -46,10 +46,11 @@
 
 .notes-body {
     flex-grow: 1;
-    font-size: 1.2em;
+    font-size: 1.3em;
     line-height: 1.5;
     margin-top: 2em;
     resize: none;
+    font-family: 'Calibri', sans-serif;
 }
 
 
@@ -81,11 +82,19 @@ textarea{
     background-color: white;
     border-right: 2px solid #dddddd;
     flex-shrink: 0;
-    overflow-y: auto;
     padding: 1em;
     width: 20%;
     margin:0;
 }
+
+  .search-input {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    padding: 5px;
+    border-color: #0b202c;
+    margin-bottom: 20px;    
+  }
 
 h1,h2{
     font-size: 2.5em;
@@ -199,12 +208,17 @@ footer{
   }
   
   .sidebar.dark {
-    background-color: #01352c;
+    background-color: #011e29;
   }
   
   .main-content.dark, .notes-preview.dark, .notes-title.dark, .notes-body.dark {
+<<<<<<< HEAD
     background-color: #04594b;
     color: white;
+=======
+    background-color: #1a274a;
+    color: #f7ffe6;
+>>>>>>> ebce482b796192eeb1bd909ab723208033b7b986
   }
   
  .light-Theme-button {
@@ -213,7 +227,11 @@ footer{
 }
 
 input::file-selector-button, .button-border-dark {
+<<<<<<< HEAD
     border: 1.5px solid white; 
+=======
+    border: 3px solid #92bce1; 
+>>>>>>> ebce482b796192eeb1bd909ab723208033b7b986
   }
 
 
