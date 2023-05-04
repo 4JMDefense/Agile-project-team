@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+  <head>
+    <title>Notify</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap"
+      rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+      rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cutive+Mono&display=swap" rel="stylesheet">
+    <script src="scripts/script.js" defer></script>
+    <script src="scripts/main.js" defer></script>
+  </head>
+
+  <body>
+    <nav class="sidebar" id="app">
+      <h1 class="title">Notify</h1>
+      <button class="dark-Theme" type="button">Dark Theme</button>
+      <div class="notes-sidebar">
+        <button class="new-note" type="button">New Note</button>
+        <button class="save-button" type="button">Save</button>
+        <div class="notes-list">
+          <div class="notes-list-item notes-list-item--selected">
+              <div class="notes-small-title">Welcome to Notify!</div>
+              <div class="notes-small-body">Instructions go here</div>
+              <div class="notes-small-updated">Thursday 3:30pm</div>
+          </div>
+      </div>
+    </nav>
+
+    <div class="main-content">
+        <main>
+          <div class="notes-preview">
+            <input class="notes-title" type="text" placeholder="Enter a title...">
+            <textarea class="notes-body" placeholder="I am the notes body..."></textarea>
+          </div>
+          <input type="file" id="fileInput">
+        </main>
+
+        <footer>
+          <div class="footer-img">
+            <a href="https://github.com/4JMDefense/Agile-project-team" target="_blank">
+              <img src="img/github-mark.png"  id="logo" alt="Github link">
+            </a>
+          </div> 
+        </footer>
+    </div>
+  </body>    
+</html>
