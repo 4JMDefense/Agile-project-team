@@ -66,14 +66,16 @@ darkThemeButton.addEventListener('click', function() {
 //     }
 // });
 
-// import button functionality 
 
+
+// import button functionality 
 
 // Add a click event listener to the "importBtn" button to handle importing files
 importBtn.addEventListener("click", async () => {
   // Create a new input element of type "file" to open the file dialog
   const fileInput = document.createElement("input");
   fileInput.type = "file";
+
   // Add a "change" event listener to the file input element to handle file selection
   fileInput.addEventListener("change", async (event) => {
     // Get the first file selected from the file input
@@ -81,15 +83,18 @@ importBtn.addEventListener("click", async () => {
     // Create a new FormData object to hold the file data
     const formData = new FormData();
     formData.append("file", file);
+
     // Set up the fetch options for sending the file data to the server
     const fetchOptions = {
       method: "POST",
       body: formData,
     };
+
     // Try to send the file to the server and handle the response
     try {
         // Send the file to the "/api" endpoint using the fetch options
       const response = await fetch("/api", fetchOptions);
+
         // If the server responds with a successful status, process the response
       if (response.ok) {
         // Get the text content of the response
@@ -137,5 +142,51 @@ document.addEventListener("DOMContentLoaded", () => {
     fileInput.click();
   });
 });
+
+
+// Create note
+
+// Function to add a new note to the notes list in the sidebar
+function addNoteToList(title, body, updated) {
+  const notesList = document.getElementById("notesList");
+
+  // Create a new note list item
+  const listItem = document.createElement("div");
+  listItem.classList.add("notes-list-item");
+
+  // Add the title, body, and updated date to the new note list item
+  const smallTitle = document.createElement("div");
+  smallTitle.classList.add("notes-small-title");
+  smallTitle.textContent = title;
+  listItem.appendChild(smallTitle);
+
+  const smallBody = document.createElement("div");
+  smallBody.classList.add("notes-small-body");
+  smallBody.textContent = body;
+  listItem.appendChild(smallBody);
+
+  const smallUpdated = document.createElement("div");
+  smallUpdated.classList.add("notes-small-updated");
+  smallUpdated.textContent = updated;
+  listItem.appendChild(smallUpdated);
+
+  // Append the new note list item to the notes list
+  notesList.appendChild(listItem);
+}
+
+// Add a click event listener to the save button
+document.getElementById("saveButton").addEventListener("click", () => {
+  const title = document.querySelector(".notes-title").value;
+  const body = document.querySelector(".notes-body").value;
+  const updated = new Date().toLocaleString();
+
+  // Call the addNoteToList function with the title, body,
+  addNoteToList(title, body, updated);
+
+  // Clear the note title and body input fields
+  document.querySelector(".notes-title").value = "";
+  document.querySelector(".notes-body").value = "";
+  });
+
 
 
