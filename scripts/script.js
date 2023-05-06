@@ -35,36 +35,14 @@ darkThemeButton.addEventListener('click', function() {
   }
 });
 
-// Sidebar functionality - commented out for now
+// New note button functionality
+const newnoteButton = document.querySelector('.new-note');
 
-// const saveButton = document.querySelector('.save-button');
-// const newnoteButton = document.querySelector('.new-note');
+newnoteButton.addEventListener('click', function() {
+  noteTitle.value = '';
+  noteTextarea.value = '';
+});
 
-// newnoteButton.addEventListener('click', function() {
-//     noteTextarea.value = '';
-//     noteTitle.value = '';
-// });
-
-// const notesArray = [
-//     {title: "Welcome to Notify!", body: "Notify instructions go here"},
-//   ];
-// const sidebarList = document.querySelector(".sidebar ul");
-  
-// saveButton.addEventListener("click", function() {
-//     if (noteTitle) {
-//         const newNote = {title: noteTitle.value, body: noteTextarea.value};
-    
-//         notesArray.push(newNote);
-    
-//         const newListItem = document.createElement("li");
-//         newListItem.textContent = newNote.title;
-    
-//         sidebarList.appendChild(newListItem);
-    
-//         noteTextarea.value = "";
-//         noteTitle.value = "";
-//     }
-// });
 
 
 
@@ -144,35 +122,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Create note
-
-// Function to add a new note to the notes list in the sidebar
-function addNoteToList(title, body, updated) {
-  const notesList = document.getElementById("notesList");
-
-  // Create a new note list item
-  const listItem = document.createElement("div");
-  listItem.classList.add("notes-list-item");
-
-  // Add the title, body, and updated date to the new note list item
-  const smallTitle = document.createElement("div");
-  smallTitle.classList.add("notes-small-title");
-  smallTitle.textContent = title;
-  listItem.appendChild(smallTitle);
-
-  const smallBody = document.createElement("div");
-  smallBody.classList.add("notes-small-body");
-  smallBody.textContent = body;
-  listItem.appendChild(smallBody);
-
-  const smallUpdated = document.createElement("div");
-  smallUpdated.classList.add("notes-small-updated");
-  smallUpdated.textContent = updated;
-  listItem.appendChild(smallUpdated);
-
-  // Append the new note list item to the notes list
-  notesList.appendChild(listItem);
-}
 
 // Add a click event listener to the save button
 document.getElementById("saveButton").addEventListener("click", () => {
@@ -187,6 +136,56 @@ document.getElementById("saveButton").addEventListener("click", () => {
   document.querySelector(".notes-title").value = "";
   document.querySelector(".notes-body").value = "";
   });
+
+  function addNoteToList(title, body, updated) {
+    const noteItem = document.createElement("div");
+    noteItem.classList.add("notes-list-item");
+  
+    // Format the date as "Day hh:mm am/pm"
+    const formattedDate = new Date(updated).toLocaleString('en-US', {weekday: 'long', hour: 'numeric', minute: 'numeric', hour12: true});
+  
+    noteItem.innerHTML = `
+      <div class="notes-small-title">${title}</div>
+      <div class="notes-small-body">${body}</div>
+      <div class="notes-small-updated">${formattedDate}</div>
+    `;
+  
+    // Add a click event listener to the note item
+    noteItem.addEventListener("click", () => {
+      // Remove the active class from the currently active note list item
+      const activeNote = document.querySelector(".notes-list-item--active");
+      if (activeNote) {
+        activeNote.classList.remove("notes-list-item--active");
+      }
+  
+      // Add the active class to the clicked note list item
+      noteItem.classList.add("notes-list-item--active");
+  
+      // Update the note title and body input fields
+      document.querySelector(".notes-title").value = title;
+      document.querySelector(".notes-body").value = body;
+    });
+  
+    document.querySelector(".notes-list").appendChild(noteItem);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const initialTitle = "Welcome to Notify!";
+    const initialBody = "Instructions go here";
+    const initialUpdated = new Date(); // You can set a specific date if you want
+  
+    // Call the addNoteToList function with the initial title, body, and updated date
+    addNoteToList(initialTitle, initialBody, initialUpdated);
+  
+    // Set the initial note as active
+    document.querySelector(".notes-list-item").classList.add("notes-list-item--active");
+  
+    // Update the note title and body input fields with the initial note
+    document.querySelector(".notes-title").value = initialTitle;
+    document.querySelector(".notes-body").value = initialBody;
+  });
+  
+  
 
 
 
