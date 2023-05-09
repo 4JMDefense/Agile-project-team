@@ -13,13 +13,15 @@ const updateButton = document.querySelector(".update")
 
 
 function commands(event) {
-
-  noteTextarea.value = noteTextarea.value.replace("/ping", "pong")
-  noteTextarea.value = noteTextarea.value.replace("/bullet", "⚫")
-
+  noteTextarea.value = noteTextarea.value.replace("/bullet", "•");
 }
+// If the user enters the space key, run the commands function
+noteTextarea.addEventListener("keyup", function(event) {
+  if (event.keyCode === 32) {
+    commands(event);
+  }
+});
 
-updateButton.addEventListener("click", commands)
 
 darkThemeButton.addEventListener('click', function() {
   sidebar.classList.toggle('dark');
