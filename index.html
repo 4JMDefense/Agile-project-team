@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="css/stylesheet.css">
     <script src="scripts/script.js" defer></script>
   </head>
-
   <body>
     <nav class="sidebar" id="app">
       <button class="dark-Theme" type="button">Dark Theme</button>
       <div class="notes-sidebar">
         <button class="new-note" type="button">New Note</button>
-        <button class="save-button" type="button" id="saveButton">Save</button>
-        <div class="notes-list" id="notesList">
-          <!-- <div class="notes-list-item notes-list-item--selected">
-              <div class="notes-small-title"></div>
-              <div class="notes-small-body"></div>
-              <div class="notes-small-updated"></div>
-          </div> -->
+        <button class="save-button" type="button">Save</button>
+        <form class="search-form">
+          <input class="search-input" type="text" placeholder="Search...">
+        </form>
+        <div class="notes-list">
+          <div class="notes-list-item notes-list-item--selected">
+              <div class="notes-small-title">Welcome to Notify!</div>
+              <div class="notes-small-body">Instructions go here</div>
+              <div class="notes-small-updated">Thursday 3:30pm</div>
+          </div>
       </div>
     </nav>
 

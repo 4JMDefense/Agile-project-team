@@ -7,6 +7,21 @@ const importBtn = document.getElementById("fileInput");
 const noteTitle = document.querySelector('.notes-title');
 const noteTextarea = document.querySelector('.notes-body');
 const notearea= document.querySelector('.notes-preview');
+const updateButton = document.querySelector(".update")
+
+
+
+
+function commands(event) {
+  noteTextarea.value = noteTextarea.value.replace("/bullet", "•");
+}
+// If the user enters the space key, run the commands function
+noteTextarea.addEventListener("keyup", function(event) {
+  if (event.keyCode === 32) {
+    commands(event);
+  }
+});
+
 
 // Dark mode toggle button functionality 
 
