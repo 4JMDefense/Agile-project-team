@@ -6,6 +6,11 @@
     width: 100%;
     background-color: white;
 }
+
+.update{
+    background-color: #2f2d3d;
+}
+
 .notes-preview {
     display: flex;
     flex-direction: column;
