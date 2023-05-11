@@ -12,7 +12,16 @@ const notearea= document.querySelector('.notes-preview');
 function commands(event) {
   const noteTextarea = document.querySelector(".notes-body");
   // bullet
-  noteTextarea.value = noteTextarea.value.replace("/bullet", "•");
+  noteTextarea.value = noteTextarea.value.replace("/wbullet", "○ \n○ \n○ ");
+  noteTextarea.value = noteTextarea.value.replace("/bullet", "• \n• \n• ");
+  // boxes
+  noteTextarea.value = noteTextarea.value.replace("/box", "☐");
+  noteTextarea.value = noteTextarea.value.replace("/check", "☑");
+  noteTextarea.value = noteTextarea.value.replace("/cross", "☒");
+  // formatting
+  noteTextarea.value = noteTextarea.value.replace("/todo", "☐ \n☐ \n☐ ");
+  noteTextarea.value = noteTextarea.value.replace("/num","1. \n2. \n3. ");
+  noteTextarea.value = noteTextarea.value.replace("/div","\n________________________________________________________________________________________________________\n");
 
 
 
