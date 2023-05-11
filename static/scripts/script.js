@@ -66,8 +66,6 @@ newnoteButton.addEventListener('click', function() {
 });
 
 
-
-
 // import button functionality 
 
 // Add a click event listener to the "importBtn" button to handle importing files
@@ -143,13 +141,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-
-
 // Add a click event listener to the save button
 document.getElementById("saveButton").addEventListener("click", () => {
   const title = document.querySelector(".notes-title").value;
   const body = document.querySelector(".notes-body").value;
   const updated = new Date().toLocaleString();
+
+  const data = {
+    title: title,
+    body: body
+  };
+
+  fetch("/save", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(data)
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log(data.message);})
+  .catch(error => {
+    console.error("Error:", error);
+  });
 
   // Call the addNoteToList function with the title, body,
   addNoteToList(title, body, updated);
