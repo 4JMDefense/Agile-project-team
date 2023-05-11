@@ -7,13 +7,20 @@ const importBtn = document.getElementById("fileInput");
 const noteTitle = document.querySelector('.notes-title');
 const noteTextarea = document.querySelector('.notes-body');
 const notearea= document.querySelector('.notes-preview');
-const updateButton = document.querySelector(".update")
 
-
-
-
+// "/" command functionality
 function commands(event) {
+  const noteTextarea = document.querySelector(".notes-body");
+  // bullet
   noteTextarea.value = noteTextarea.value.replace("/bullet", "•");
+
+
+
+  noteTextarea.value = noteTextarea.value.replace("/date", new Date().toLocaleString());
+  noteTextarea.value = noteTextarea.value.replace("/time", new Date().toLocaleTimeString());
+  noteTextarea.value = noteTextarea.value.replace("/day", new Date().toLocaleDateString());
+  noteTextarea.value = noteTextarea.value.replace("/month", new Date().toLocaleString('en-US', {month: 'long'}));
+  noteTextarea.value = noteTextarea.value.replace("/year", new Date().getFullYear());
 }
 // If the user enters the space key, run the commands function
 noteTextarea.addEventListener("keyup", function(event) {
@@ -180,9 +187,21 @@ document.getElementById("saveButton").addEventListener("click", () => {
       document.querySelector(".notes-title").value = title;
       document.querySelector(".notes-body").value = body;
     });
+
+      // Add a double click event listener to the note item
+      noteItem.addEventListener("dblclick", () => {
+        // Display a confirmation dialog to the user
+        if (confirm("Are you sure you want to delete this note?")) {
+          // If the user confirms, remove the note item from the DOM
+          noteItem.remove();
+        }
+      });
   
     document.querySelector(".notes-list").appendChild(noteItem);
   }
+
+
+    
 
   document.addEventListener("DOMContentLoaded", () => {
     const initialTitle = "Welcome to Notify!";
@@ -201,6 +220,5 @@ document.getElementById("saveButton").addEventListener("click", () => {
   });
   
   
-
 
 
