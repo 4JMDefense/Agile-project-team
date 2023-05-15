@@ -199,6 +199,13 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Set the initial note as active
   noteItem.classList.add("notes-list-item--active");
+
+   // Remove the active class from the currently active note list item
+   const activeNoteElement = document.querySelector(".notes-list-item--active");
+   if (activeNoteElement) {
+     activeNoteElement.classList.remove("notes-list-item--active");
+   }
+
 });
 
 
