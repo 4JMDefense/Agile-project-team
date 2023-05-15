@@ -4,16 +4,26 @@ const noteTextarea = document.querySelector('.notes-body');
 
 function commands(event) {
   // bullet
+  noteTextarea.value = noteTextarea.value.replace("/wbullet", "○ \n○ \n○ ");
+  noteTextarea.value = noteTextarea.value.replace("/bullet", "• \n• \n• ");
+  // boxes
+  noteTextarea.value = noteTextarea.value.replace("/box", "☐");
+  noteTextarea.value = noteTextarea.value.replace("/check", "☑");
+  noteTextarea.value = noteTextarea.value.replace("/cross", "☒");
+  // formatting
+  noteTextarea.value = noteTextarea.value.replace("/todo", "☐ \n☐ \n☐ ");
+  noteTextarea.value = noteTextarea.value.replace("/num","1. \n2. \n3. ");
+  noteTextarea.value = noteTextarea.value.replace("/div","\n_____________________________________________________________________________________________________\n");
+
   noteTextarea.value = noteTextarea.value.replace("/bullet", "•");
-  
-  
-  
+ 
   noteTextarea.value = noteTextarea.value.replace("/date", new Date().toLocaleString());
   noteTextarea.value = noteTextarea.value.replace("/time", new Date().toLocaleTimeString());
   noteTextarea.value = noteTextarea.value.replace("/day", new Date().toLocaleDateString());
   noteTextarea.value = noteTextarea.value.replace("/month", new Date().toLocaleString('en-US', {month: 'long'}));
   noteTextarea.value = noteTextarea.value.replace("/year", new Date().getFullYear());
 }
+
 // If the user enters the space key, run the commands function
 noteTextarea.addEventListener("keyup", function(event) {
   if (event.keyCode === 32) {
