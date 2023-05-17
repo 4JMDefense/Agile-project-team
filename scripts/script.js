@@ -213,6 +213,7 @@ document.querySelector(".notes-list").addEventListener("dblclick", (event) => {
        restoreButton.textContent = "Restore";
        restoreButton.classList.add("restore-button");
        noteItem.appendChild(restoreButton);
+       
 
        // Add a delete button to the note
       const deleteButton = document.createElement("button");
@@ -267,6 +268,11 @@ document.querySelector(".dropdown-container").addEventListener("click", (event) 
   const noteItem = event.target.parentElement;
 
   if (event.target.classList.contains("restore-button")) {
+
+    //Ask the user if they want to restore the note
+    if (!confirm("Are you sure you want to restore this note?")) {
+      return;
+    }
 
     // Move the note item back to the notes list
     const notesList = document.querySelector(".notes-list");
