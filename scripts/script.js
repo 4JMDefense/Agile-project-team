@@ -1,22 +1,52 @@
+var dropdown = document.getElementsByClassName("dropdown-btn");
+var i;
+
+for (i = 0; i < dropdown.length; i++) {
+  dropdown[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+
+    var dropdownContent = this.nextElementSibling;
+
+    if (dropdownContent.style.display === "block") {
+      dropdownContent.style.display = "none";
+    } else {
+      dropdownContent.style.display = "block";
+    }
+    //if there is no item, notice user to add item
+
+  });
+}
+
+function updateBinMessage() {
+  const binDropdown = document.querySelector(".dropdown-container");
+  const emptyBinMessage = binDropdown.querySelector(".empty-bin-message");
+  const noteItems = binDropdown.getElementsByClassName("notes-list-item");
+  
+  if (noteItems.length > 0) {
+    // If there are any note items in the bin, hide the message
+    emptyBinMessage.style.display = "none";
+  } else {
+    // Otherwise, show the message
+    emptyBinMessage.style.display = "block";
+  }
+}
+
+
 // "/" command functionality
 
 const noteTextarea = document.querySelector('.notes-body');
 
 function commands(event) {
   // bullet
-  noteTextarea.value = noteTextarea.value.replace("/wbullet", "○ \n○ \n○ ");
-  noteTextarea.value = noteTextarea.value.replace("/bullet", "• \n• \n• ");
+  noteTextarea.value = noteTextarea.value.replace("/wbullet", "○");
+  noteTextarea.value = noteTextarea.value.replace("/bullet", "•");
   // boxes
   noteTextarea.value = noteTextarea.value.replace("/box", "☐");
   noteTextarea.value = noteTextarea.value.replace("/check", "☑");
   noteTextarea.value = noteTextarea.value.replace("/cross", "☒");
   // formatting
-  noteTextarea.value = noteTextarea.value.replace("/todo", "☐ \n☐ \n☐ ");
-  noteTextarea.value = noteTextarea.value.replace("/num","1. \n2. \n3. ");
-  noteTextarea.value = noteTextarea.value.replace("/div","\n_____________________________________________________________________________________________________\n");
+  noteTextarea.value = noteTextarea.value.replace("/todo", "☐"); 
 
-  noteTextarea.value = noteTextarea.value.replace("/bullet", "•");
- 
   noteTextarea.value = noteTextarea.value.replace("/date", new Date().toLocaleString());
   noteTextarea.value = noteTextarea.value.replace("/time", new Date().toLocaleTimeString());
   noteTextarea.value = noteTextarea.value.replace("/day", new Date().toLocaleDateString());
@@ -166,14 +196,117 @@ document.querySelector(".notes-list").addEventListener("dblclick", (event) => {
     // If a note item was double clicked, display a confirmation dialog
     if (confirm("Are you sure you want to delete this note?")) {
       // If the user confirms, remove the note item from the DOM
-      noteItem.remove();
+      const binDropdown = document.querySelector(".dropdown-container");
+
+      // Move the note item to the bin dropdown
+      binDropdown.appendChild(noteItem);
 
       // If the deleted note was the active note, clear the active note
       if (activeNote === noteItem) {
         activeNote = null;
       }
+
+      noteItem.dataset.dateDeleted = new Date().toISOString();
+
+       // Add a restore button to the note
+       const restoreButton = document.createElement("button");
+       restoreButton.textContent = "Restore";
+       restoreButton.classList.add("restore-button");
+       noteItem.appendChild(restoreButton);
+
+       // Add a delete button to the note
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "Delete";
+      deleteButton.classList.add("delete-button");
+      noteItem.appendChild(deleteButton);
+
     }
   }
+  updateBinMessage();
+});
+
+// Add a double click event listener to the bin dropdown to handle note deletion
+// document.querySelector(".dropdown-container").addEventListener("dblclick", (event) => {
+//   // Get the clicked note item
+//   const noteItem = event.target.closest(".notes-list-item");
+
+//   if (noteItem) {
+//     // If a note item was double clicked, display a confirmation dialog
+//     if (confirm("Are you sure you want to permanently delete this note permanantly?")) {
+//       // Remove the note item from the DOM
+//       event.stopPropagation();
+
+//       noteItem.remove();
+//     }
+//   }
+// });
+
+// document.querySelector(".dropdown-container").addEventListener("click", (event) => {
+//   // Get the clicked note item
+//   const noteItem = event.target.closest(".notes-list-item");
+
+//   if (noteItem) {
+//     // If a note item was clicked, display a confirmation dialog
+//     if (confirm("Do you want to restore this note?")) {
+//       // Stop the event from bubbling up
+//       event.stopPropagation();
+
+//       // Move the note item back to the notes list
+//       const notesList = document.querySelector(".notes-list");
+//       notesList.appendChild(noteItem);
+
+//       // Remove the dateDeleted attribute from the restored note
+//       delete noteItem.dataset.dateDeleted;
+//     }
+//   }
+// });
+
+document.querySelector(".dropdown-container").addEventListener("click", (event) => {
+  // Check if the restore button was clicked
+  // Get the note item
+  const noteItem = event.target.parentElement;
+
+  if (event.target.classList.contains("restore-button")) {
+
+    // Move the note item back to the notes list
+    const notesList = document.querySelector(".notes-list");
+    notesList.appendChild(noteItem);
+
+    // Remove the dateDeleted attribute from the restored note
+    delete noteItem.dataset.dateDeleted;
+
+    // // Remove the restore button from the note
+    // event.target.remove();
+
+     // Remove the restore and delete buttons from the note
+     noteItem.querySelector(".restore-button").remove();
+     noteItem.querySelector(".delete-button").remove();
+   }
+   else if (event.target.classList.contains("delete-button")) {
+     // If the delete button was clicked, display a confirmation dialog
+
+     if (confirm("Are you sure you want to permanently delete this note?")) {
+       // If the user confirms, remove the note item from the DOM
+       noteItem.remove();
+     }
+  }
+  updateBinMessage();
+});
+
+// When the page is loaded, remove any notes that have been in the bin for more than 30 days
+document.addEventListener("DOMContentLoaded", function() {
+  const binDropdown = document.querySelector(".dropdown-container");
+  const noteItems = binDropdown.querySelectorAll(".notes-list-item");
+
+  noteItems.forEach(noteItem => {
+    const dateDeleted = new Date(noteItem.dataset.dateDeleted);
+    const now = new Date();
+
+    // If the note has been in the bin for more than 30 days, remove it
+    if ((now - dateDeleted) > (30 * 24 * 60 * 60 * 1000)) {
+      noteItem.remove();
+    }
+  });
 });
 
 
@@ -264,7 +397,7 @@ formData.append("file", file);
 document.addEventListener("DOMContentLoaded", () => {
     // Get the file input element with the ID "fileInput"
     const fileInput = document.getElementById("fileInput");
-
+ 
     // Add a "change" event listener to the file input element to handle file selection
     fileInput.addEventListener("change", async (event) => {
     // Get the first file selected from the file input
