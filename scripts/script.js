@@ -274,6 +274,7 @@ document.querySelector(".dropdown-container").addEventListener("click", (event) 
       return;
     }
 
+
     // Move the note item back to the notes list
     const notesList = document.querySelector(".notes-list");
     notesList.appendChild(noteItem);

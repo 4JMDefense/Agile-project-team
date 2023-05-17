@@ -76,6 +76,9 @@
 .notes-small-body {
     padding: 0 10px;
     text-align: left;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
 }
 
