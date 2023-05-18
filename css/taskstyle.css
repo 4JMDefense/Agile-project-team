@@ -1,6 +1,6 @@
 /* Task board css */
 
-body{
+main{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
 }
@@ -39,7 +39,21 @@ button{
     background-color: darkslateblue;
 }
 
+#return{
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 2em;
+    font-weight: bold;
+    background-color: darkslateblue;
+}
+
+
 textarea{
     resize: none;
     font-weight: 1000;
+}
+
+#return{
 }

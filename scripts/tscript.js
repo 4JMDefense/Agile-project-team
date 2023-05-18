@@ -9,6 +9,9 @@ function addTodo(){
     const newText = document.createElement("textarea")
     newText.setAttribute('cols','65')
     const newTask = document.createElement("td")
+    // const newCheck = document.createElement("input")
+    // newCheck.setAttribute("type","checkbox")
+    // todoList.appendChild(newCheck)
     newTask.append(newText)
     todoList.appendChild(newTask)
 }
