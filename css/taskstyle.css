@@ -1,0 +1,45 @@
+/* Task board css */
+
+body{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+td{
+    display: flex;
+    padding-bottom: 100px;
+}
+
+table, th{
+    border: 2px solid black;
+}
+
+.thead{
+    font-size: 30px;
+    font-weight: 100px;
+    background-color: darkslateblue;
+    color:white
+}
+
+
+
+.tbody{
+    font-weight: lighter;
+    height:100%;
+}
+
+button{
+    border: none;
+    border-radius: 5px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.5em;
+    font-weight: bold;
+    width: 100%;
+    background-color: darkslateblue;
+}
+
+textarea{
+    resize: none;
+    font-weight: 1000;
+}
