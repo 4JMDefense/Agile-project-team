@@ -3,6 +3,7 @@ import datetime
 import os
 import sqlite3
 import create_db
+from flask_cors import CORS
 
 app = Flask(__name__)
 
@@ -23,13 +24,15 @@ def close_db(exception):
     db = getattr(g, '_database', None)
     if db is not None:
         db.close()
-    c = getattr(g, '_cursor', None)
-    if c is not None:
-        c.close()
 
 @app.route('/')
-def notify():
-    return render_template('index.html')
+def display_notes():
+    db = get_db()
+    c = db.cursor()
+    c.execute("SELECT title, body FROM notes")
+    notes = c.fetchall()
+    c.close()
+    return render_template('index.html', notes=notes)
 
 @app.route('/save', methods=['POST'])
 def save_note():
@@ -44,6 +47,17 @@ def save_note():
 
     print(f"Note saved: {title}")
     return jsonify({'status': 'success 200'})
+
+CORS(app)
+
+@app.route('/notes', methods=['GET'])
+def get_notes():
+    db = get_db()
+    c = db.cursor()
+    c.execute("SELECT title, body, updated FROM notes")
+    notes = [{"title": title, "body": body, "updated": updated} for title, body, updated in c.fetchall()]
+    c.close()
+    return jsonify(notes)
 
 if __name__ == '__main__':
     app.run(debug=True, threaded=True)

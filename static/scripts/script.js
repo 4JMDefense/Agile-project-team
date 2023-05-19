@@ -231,7 +231,14 @@ document.getElementById("saveButton").addEventListener("click", () => {
     document.querySelector(".notes-title").value = initialTitle;
     document.querySelector(".notes-body").value = initialBody;
   });
-  
-  
 
-
+  document.addEventListener("DOMContentLoaded", () => {
+    fetch("/notes")
+        .then(response => response.json())
+        .then(notes => {
+            for (const note of notes) {
+                addNoteToList(note.title, note.body, note.updated);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+});
