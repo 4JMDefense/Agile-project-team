@@ -208,65 +208,36 @@ document.querySelector(".notes-list").addEventListener("dblclick", (event) => {
 
       noteItem.dataset.dateDeleted = new Date().toISOString();
 
-       // Add a restore button to the note
-       const restoreButton = document.createElement("button");
-       restoreButton.textContent = "Restore";
-       restoreButton.classList.add("restore-button");
-       noteItem.appendChild(restoreButton);
-       
-
-       // Add a delete button to the note
+      const buttonGroup = document.createElement("div");
+      buttonGroup.classList.add("button-group");
+    
+      // Create the restore button
+      const restoreButton = document.createElement("button");
+      restoreButton.textContent = "Restore";
+      restoreButton.classList.add("restore-button");
+      
+      // Create the delete button
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.classList.add("delete-button");
-      noteItem.appendChild(deleteButton);
+    
+      // Add the buttons to the button group div
+      buttonGroup.appendChild(restoreButton);
+      buttonGroup.appendChild(deleteButton);
+      
+      // Add the button group to the note item
+      noteItem.appendChild(buttonGroup);
 
     }
   }
   updateBinMessage();
 });
 
-// Add a double click event listener to the bin dropdown to handle note deletion
-// document.querySelector(".dropdown-container").addEventListener("dblclick", (event) => {
-//   // Get the clicked note item
-//   const noteItem = event.target.closest(".notes-list-item");
-
-//   if (noteItem) {
-//     // If a note item was double clicked, display a confirmation dialog
-//     if (confirm("Are you sure you want to permanently delete this note permanantly?")) {
-//       // Remove the note item from the DOM
-//       event.stopPropagation();
-
-//       noteItem.remove();
-//     }
-//   }
-// });
-
-// document.querySelector(".dropdown-container").addEventListener("click", (event) => {
-//   // Get the clicked note item
-//   const noteItem = event.target.closest(".notes-list-item");
-
-//   if (noteItem) {
-//     // If a note item was clicked, display a confirmation dialog
-//     if (confirm("Do you want to restore this note?")) {
-//       // Stop the event from bubbling up
-//       event.stopPropagation();
-
-//       // Move the note item back to the notes list
-//       const notesList = document.querySelector(".notes-list");
-//       notesList.appendChild(noteItem);
-
-//       // Remove the dateDeleted attribute from the restored note
-//       delete noteItem.dataset.dateDeleted;
-//     }
-//   }
-// });
 
 document.querySelector(".dropdown-container").addEventListener("click", (event) => {
-  // Check if the restore button was clicked
-  // Get the note item
-  const noteItem = event.target.parentElement;
 
+  const noteItem = event.target.closest(".notes-list-item");
+  
   if (event.target.classList.contains("restore-button")) {
 
     //Ask the user if they want to restore the note
@@ -282,20 +253,17 @@ document.querySelector(".dropdown-container").addEventListener("click", (event) 
     // Remove the dateDeleted attribute from the restored note
     delete noteItem.dataset.dateDeleted;
 
-    // // Remove the restore button from the note
-    // event.target.remove();
-
      // Remove the restore and delete buttons from the note
-     noteItem.querySelector(".restore-button").remove();
-     noteItem.querySelector(".delete-button").remove();
+     noteItem.querySelector(".button-group").remove();
    }
-   else if (event.target.classList.contains("delete-button")) {
-     // If the delete button was clicked, display a confirmation dialog
 
-     if (confirm("Are you sure you want to permanently delete this note?")) {
-       // If the user confirms, remove the note item from the DOM
-       noteItem.remove();
-     }
+  else if (event.target.classList.contains("delete-button")) {
+      // If the delete button was clicked, display a confirmation dialog
+      if (confirm("Are you sure you want to permanently delete this note?")) {
+        // If the user confirms, remove the note item from the DOM
+        noteItem.remove();
+      }
+
   }
   updateBinMessage();
 });
@@ -315,6 +283,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   });
 });
+
 
 
 

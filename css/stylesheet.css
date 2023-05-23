@@ -1,18 +1,54 @@
+.button-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .button-group button {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+  .button-group .restore-button {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Some padding */
+    cursor: pointer; /* Add a mouse pointer on hover */
+  }
+  
+  .button-group .restore-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
+  .button-group .delete-button {
+    background-color: #f44336; /* Red background */
+    color: white; /* White text */
+    border: none; /* Remove border */
+    padding: 10px 20px; /* Some padding */
+    cursor: pointer; /* Add a mouse pointer on hover */
+  }
+  
+  .button-group .delete-button:hover {
+    background-color: #da190b; /* Darker red on hover */
+  }
+
 /* Style the sidenav links and the dropdown button */
   .sidebar a, .dropdown-btn {
     padding: 6px 8px 6px 16px;
     text-decoration: none;
     font-size: 20px;
-    color: #818181;
+    color: black;
     display: block;
     border: none;
-    background: none;
+    background-color: gray;
     width:100%;
     text-align: left;
     cursor: pointer;
     outline: none;
   }
-  
+
+
+
   /* On mouse-over */
   .sidebar a:hover, .dropdown-btn:hover {
     color: #f1f1f1;
