@@ -220,9 +220,11 @@ input::file-selector-button:hover{
     cursor: pointer;
 }
 
+
 .save-button{
     background-color: #375f68;
     /* margin-right: 0; */
+    
 }
 .save-button:hover{
     background-color: #1c4e6d;
