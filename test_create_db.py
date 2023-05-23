@@ -11,7 +11,7 @@ class test_database(unittest.TestCase):
     def remove(self):
         if os.path.exists(self.db_path):
             os.remove(self.db_path) # remove test db after test
-
+            
     def test_db(self):
         if not os.path.exists(self.db_path):
             create_db.database()
@@ -20,9 +20,9 @@ class test_database(unittest.TestCase):
         self.assertTrue(os.path.exists(self.db_path))
 
         conn = sqlite3.connect(self.db_path)
-        c = conn.cursor() 
-        c.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='notes'")
-        result = c.fetchone()
+        cursor = conn.cursor() 
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='notes'")
+        result = cursor.fetchone()
         conn.close()
 
         self.assertIsNotNone(result)
