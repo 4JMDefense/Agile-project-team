@@ -44,7 +44,6 @@ darkThemeButton.addEventListener('click', function() {
     button.classList.toggle('button-border-dark');
   });
 
-
   if (darkThemeButton.textContent === 'Dark Theme') {
     darkThemeButton.textContent = 'Light Theme';
     darkThemeButton.classList.add('light-Theme-button');
@@ -209,12 +208,8 @@ document.getElementById("saveButton").addEventListener("click", () => {
           noteItem.remove();
         }
       });
-  
     document.querySelector(".notes-list").appendChild(noteItem);
   }
-
-
-    
 
   document.addEventListener("DOMContentLoaded", () => {
     const initialTitle = "Welcome to Notify!";
@@ -242,3 +237,22 @@ document.getElementById("saveButton").addEventListener("click", () => {
         })
         .catch(error => console.error("Error:", error));
 });
+
+const searchInput = document.querySelector('.search-input');
+searchInput.addEventListener('input', () => {
+    fetch(`/notes?query=${encodeURIComponent(searchInput.value)}`)
+        .then(response => response.json())
+        .then(notes => {
+            // Remove all current notes from sidebar when searching
+            const notesList = document.querySelector(".notes-list");
+            while (notesList.firstChild) {
+                notesList.firstChild.remove();
+            }
+            // Add each note matching from the response query text
+            for (const note of notes) {
+                addNoteToList(note.title, note.body, note.updated);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+});
+
