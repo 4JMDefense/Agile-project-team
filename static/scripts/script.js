@@ -48,11 +48,11 @@ darkThemeButton.addEventListener('click', function() {
   if (darkThemeButton.textContent === 'Dark Theme') {
     darkThemeButton.textContent = 'Light Theme';
     darkThemeButton.classList.add('light-Theme-button');
-    logo.src = "img/github-mark-white.png";
+    logo.src = "static/img/github-mark-white.png";
   } else {
     darkThemeButton.textContent = 'Dark Theme';
     darkThemeButton.classList.remove('light-Theme-button')
-    logo.src = "img/github-mark.png";
+    logo.src = "static/img/github-mark.png";
 
   }
 });
