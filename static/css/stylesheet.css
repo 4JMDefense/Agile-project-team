@@ -177,8 +177,10 @@ textarea::-webkit-scrollbar-thumb:hover {
     border-radius: 7px;
     font-weight: bold;
   }
-  
 
+  .notes-list-item--active, .notes-small-title.dark .notes-small-title.dark  {
+    color: black
+  }
 
 .footer-img {
     display: flex;        
@@ -198,7 +200,7 @@ footer{
 }
 
 .dark {
-    color: #060606;
+    color: white;
   }
   
   .sidebar.dark {
