@@ -32,6 +32,10 @@
     background-color: #da190b; /* Darker red on hover */
   }
 
+#sortSelection{
+    margin-bottom: 1em;
+}
+
 /* Style the sidenav links and the dropdown button */
   .sidebar a, .dropdown-btn {
     padding: 6px 8px 6px 16px;

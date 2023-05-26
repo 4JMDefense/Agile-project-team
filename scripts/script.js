@@ -32,6 +32,8 @@ function updateBinMessage() {
 }
 
 
+
+
 // "/" command functionality
 
 const noteTextarea = document.querySelector('.notes-body');
@@ -120,20 +122,86 @@ newNoteButton.addEventListener('click', function() {
 });
 
 // Add a click event listener to the save button
+
+
+// Define a function to sort the notes
+function sortNotes() {
+  const notesList = document.querySelector(".notes-list");
+  const binDropdown = document.querySelector(".dropdown-container");
+  const notesArray = Array.from(notesList.children).filter(note => !note.classList.contains("deleted-note"));
+  const option = document.getElementById("sortSelection").value;
+
+  if (option === "title") {
+    notesArray.sort((a, b) => {
+      const aTitleElement = a.querySelector(".notes-small-title");
+      const bTitleElement = b.querySelector(".notes-small-title");
+      if (!aTitleElement || !bTitleElement) return 0;
+      const aTitle = aTitleElement.textContent.toUpperCase();
+      const bTitle = bTitleElement.textContent.toUpperCase();
+      if (aTitle < bTitle) {
+        return -1;
+      } else if (aTitle > bTitle) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+  } else if (option === "recent") {
+    notesArray.sort((a, b) => {
+      const aDateElement = a.querySelector(".notes-small-updated");
+      const bDateElement = b.querySelector(".notes-small-updated");
+
+      // if one of the elements doesn't exist or doesn't contain a proper date-time string, stop
+      if (!aDateElement || !bDateElement || isNaN(Date.parse(aDateElement.dataset.updated)) || isNaN(Date.parse(bDateElement.dataset.updated))) {
+        return 0;
+      }
+
+      const aDate = new Date(aDateElement.dataset.updated);
+      const bDate = new Date(bDateElement.dataset.updated);
+
+      // a and b are Date objects and we can compare them
+      return bDate - aDate;
+    });
+  }
+
+  // Clear the notes list
+  while (notesList.firstChild) {
+    notesList.firstChild.remove();
+  }
+
+  // Append the sorted notes back to the notes list
+  notesArray.forEach(note => {
+    notesList.appendChild(note);
+  });
+
+  // Append the notes from the bin back to the bin dropdown
+  Array.from(binDropdown.children).forEach(note => {
+    binDropdown.appendChild(note);
+  });
+
+  // Update the bin message
+  updateBinMessage();
+}
+
+
+// Add event listener to the sort selection dropdown
+document.getElementById("sortSelection").addEventListener("change", sortNotes);
+
+// Call the sorting function whenever a note is added or updated
 document.getElementById("saveButton").addEventListener("click", () => {
   const title = document.querySelector(".notes-title").value;
   const body = document.querySelector(".notes-body").value;
-  const updated = new Date().toLocaleString();
-  const formattedDate = new Date(updated).toLocaleString('en-US', {weekday: 'long', hour: 'numeric', minute: 'numeric', hour12: true});
+  const updated = new Date();
+const formattedDate = updated.toLocaleString('en-US', {weekday: 'long', hour: 'numeric', minute: 'numeric', hour12: true});
 
-  if (activeNote) {
+if (activeNote) {
     // If there's an active note, update its content
     activeNote.innerHTML = `
       <div class="notes-small-title">${title}</div>
       <div class="notes-small-body">${body}</div>
-      <div class="notes-small-updated">${formattedDate}</div>
-    `;
-  } else {
+      <div class="notes-small-updated" data-updated="${updated.toISOString()}">${formattedDate}</div>
+      `;
+} else {
     // If there's no active note, create a new note
     const noteItem = document.createElement("div");
     noteItem.classList.add("notes-list-item");
@@ -141,21 +209,21 @@ document.getElementById("saveButton").addEventListener("click", () => {
     noteItem.innerHTML = `
       <div class="notes-small-title">${title}</div>
       <div class="notes-small-body">${body}</div>
-      <div class="notes-small-updated">${formattedDate}</div>
-    `;
+      <div class="notes-small-updated" data-updated="${updated.toISOString()}">${formattedDate}</div>
+      `;
 
     // Add the note item to the notes list
     document.querySelector(".notes-list").appendChild(noteItem);
-
-  }
-  
-  // Clear the note title and body input fields
-  document.querySelector(".notes-title").value = "";
-  document.querySelector(".notes-body").value = "";
+}
+    
+    // Clear the note title and body input fields
+    document.querySelector(".notes-title").value = "";
+    document.querySelector(".notes-body").value = "";
   
   // Clear the active note
   activeNote = null;
   
+  sortNotes();
 });
 
 
@@ -174,7 +242,7 @@ document.querySelector(".notes-list").addEventListener("click", (event) => {
     
     document.querySelector(".notes-title").value = title;
     document.querySelector(".notes-body").value = body;
-
+    
     // Remove the active class from the currently active note list item
     const activeNoteElement = document.querySelector(".notes-list-item--active");
     if (activeNoteElement) {
@@ -195,8 +263,11 @@ document.querySelector(".notes-list").addEventListener("dblclick", (event) => {
   if (noteItem) {
     // If a note item was double clicked, display a confirmation dialog
     if (confirm("Are you sure you want to delete this note?")) {
+
+      noteItem.classList.add("deleted-note");
+
       // If the user confirms, remove the note item from the DOM
-      const binDropdown = document.querySelector(".dropdown-container");
+      let binDropdown = document.querySelector(".dropdown-container");
 
       // Move the note item to the bin dropdown
       binDropdown.appendChild(noteItem);
@@ -228,6 +299,8 @@ document.querySelector(".notes-list").addEventListener("dblclick", (event) => {
       // Add the button group to the note item
       noteItem.appendChild(buttonGroup);
 
+      // Update the binDropdown to reflect the current state of the DOM
+      binDropdown = document.querySelector(".dropdown-container");
     }
   }
   updateBinMessage();
@@ -237,8 +310,10 @@ document.querySelector(".notes-list").addEventListener("dblclick", (event) => {
 document.querySelector(".dropdown-container").addEventListener("click", (event) => {
 
   const noteItem = event.target.closest(".notes-list-item");
-  
+
   if (event.target.classList.contains("restore-button")) {
+
+    noteItem.classList.remove("deleted-note");
 
     //Ask the user if they want to restore the note
     if (!confirm("Are you sure you want to restore this note?")) {
