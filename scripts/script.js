@@ -187,6 +187,26 @@ function sortNotes() {
 // Add event listener to the sort selection dropdown
 document.getElementById("sortSelection").addEventListener("change", sortNotes);
 
+
+const searchInput = document.querySelector('.searchInput');
+searchInput.addEventListener('input', () => {
+    fetch(`/notes?query=${encodeURIComponent(searchInput.value)}`)
+        .then(response => response.json())
+        .then(notes => {
+            // Remove all current notes from sidebar when searching
+            const notesList = document.querySelector(".notes-list");
+            while (notesList.firstChild) {
+                notesList.firstChild.remove();
+            }
+            // Add each note matching from the response query text
+            for (const note of notes) {
+                addNoteToList(note.title, note.body, note.updated);
+            }
+        })
+        .catch(error => console.error("Error:", error));
+});
+
+
 // Call the sorting function whenever a note is added or updated
 document.getElementById("saveButton").addEventListener("click", () => {
   const title = document.querySelector(".notes-title").value;
