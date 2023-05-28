@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+  <head>
+    <title>Notify</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/stylesheet.css') }}">
+    <script src="{{ url_for('static', filename='scripts/script.js') }}" defer></script>
+  </head>
+
+  <body>
+    <nav class="sidebar" id="app">
+      <button class="dark-Theme" type="button">Dark Theme</button>
+      <div class="notes-sidebar">
+        <button class="new-note" type="button">New Note</button>
+        <button class="save-button" type="button" id="saveButton">Save</button>
+        <div class="search-bar">
+          <input class="search-input" type="text" placeholder="Search">
+        </div>
+        <div class="notes-list" id="notesList">
+      </div>
+    </nav>
+
+    <div class="main-content">
+        <main>
+          <div class="notes-preview">
+            <input class="notes-title" type="text" placeholder="Enter a title...">
+            <textarea class="notes-body" placeholder="Insert Notes Here..."></textarea>
+          </div>
+          <input type="file" id="fileInput">
+        </main>
+
+        <footer>
+          <div class="footer-img">
+            <a href="https://github.com/4JMDefense/Agile-project-team" target="_blank">
+              <img src="{{url_for('static', filename='img/github-mark.png')}}"  id="logo" alt="Github link">
+            </a>
+          </div> 
+        </footer>
+    </div>
+  </body>    
+</html>
